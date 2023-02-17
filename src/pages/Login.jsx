@@ -13,8 +13,9 @@ import { useForm } from 'react-hook-form';
 import { emailRegex } from '../helpers/regex';
 import { apiNewUser } from '../api/calls/users/users';
 import { useNavigate } from 'react-router-dom';
+import { apiLogin } from '../api/calls/auth/auth';
 
-export const SignUp = () => {
+export const Login = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [alert, setAlert] = useState({ open: false, type: 'error', message: ''});
 	const [userName, setUserName] = useState("");
@@ -33,20 +34,27 @@ export const SignUp = () => {
 	const onSubmit = (data) => {
 		console.log(data);
 
-		apiNewUser(data).then( response =>{
-			setAlert({open: true, type: 'success', message: response.message});
-			setUserName("");
-			setEmail('');
-			setPassword('');
+        apiLogin(data)
+            .then(response =>{
+                setAlert({
+                    open: true,
+                    type: 'success',
+                    message: response.message
+                });
 
-			setTimeout(() => {
-				navigate('/');
-			}, 1500);
+                setUserName("");
+                setPassword("");
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);
+
+            })
+            .catch( error => {
+                setAlert({open: true, type: 'error', message: error.message})
+            })
 
 
-		}).catch( error => {
-			setAlert({open: true, type: 'error', message: error.message})
-		});
 	};
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -82,17 +90,17 @@ export const SignUp = () => {
 							}}
 						>
 							<Typography textAlign='center' variant='h4'>
-								Sign Up
+								Login
 							</Typography>
 
 							<TextField
-								label='User Name'
+								label='User Name or email'
 								variant='filled'
 								fullWidth
 								value={userName}
-								error={errors.userName && true}
-								helperText={errors.userName ? errors.userName?.message : ''}
-								{...register('userName', {
+								error={errors.email && true}
+								helperText={errors.email ? errors.email?.message : ''}
+								{...register('email', {
 									required: { value: true, message: 'user name is required' },
 									minLength: {
 										value: 6,
@@ -105,22 +113,7 @@ export const SignUp = () => {
 									onChange: (e) => setUserName(e.target.value)
 								})}
 							/>
-							<TextField
-								label='Email'
-								variant='filled'
-								fullWidth
-								value={email}
-								error={errors.email && true}
-								helperText={errors.email ? errors.email?.message : ''}
-								{...register('email', {
-									required: { value: true, message: 'El correo es requerido' },
-									pattern: {
-										value: emailRegex,
-										message: 'Introduce un correo valido',
-									},
-									onChange: (e) => setEmail(e.target.value)
-								})}
-							/>
+
 
 							<FormControl fullWidth variant='outlined'>
 								<InputLabel htmlFor='outlined-adornment-password'>
@@ -160,7 +153,7 @@ export const SignUp = () => {
 							</Button>
 
 							<Grid>
-								already have an account? <Link href='/login'>LogIn</Link>
+                            You still do not have an account?<Link href='/signup'>Signup</Link>
 							</Grid>
 						</form>
 					</Paper>

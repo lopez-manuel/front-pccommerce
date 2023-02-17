@@ -1,4 +1,4 @@
-import { api } from '../axios/instance'
+import { api } from '../../axios/instance'
 
 
 
@@ -11,6 +11,5 @@ export const apiNewUser = async ( data ) => {
         throw new Error(errors[0].msg);
     } )
 
-
-
 }
+
