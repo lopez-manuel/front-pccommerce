@@ -7,15 +7,20 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Button, Link, TextField, Typography } from '@mui/material';
+import { Alert, Button, Link, TextField, Typography } from '@mui/material';
 import FilledInput from '@mui/material/FilledInput';
 import { useForm } from 'react-hook-form';
 import { emailRegex } from '../helpers/regex';
-import { api } from '../api/axios/instance';
 import { apiNewUser } from '../api/calls/users';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const [alert, setAlert] = useState({ open: false, type: 'error', message: ''});
+	const [userName, setUserName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 
 	const {
@@ -28,7 +33,20 @@ export const SignUp = () => {
 	const onSubmit = (data) => {
 		console.log(data);
 
-		apiNewUser(data);
+		apiNewUser(data).then( response =>{
+			setAlert({open: true, type: 'success', message: response.message});
+			setUserName("");
+			setEmail('');
+			setPassword('');
+
+			setTimeout(() => {
+				navigate('/');
+			}, 1500);
+
+
+		}).catch( error => {
+			setAlert({open: true, type: 'error', message: error.message})
+		});
 	};
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -42,6 +60,7 @@ export const SignUp = () => {
 				height='100vh'
 				width='100vw'
 			>
+				
 				<Grid item width='300px' margin='0 auto'>
 					<Paper
 						elevation={3}
@@ -52,6 +71,7 @@ export const SignUp = () => {
 							gap: '16px',
 						}}
 					>
+						{(alert.open) && <Alert severity={alert.type}>{alert.message}</Alert>}
 						<form
 							onSubmit={handleSubmit(onSubmit)}
 							style={{
@@ -69,6 +89,7 @@ export const SignUp = () => {
 								label='User Name'
 								variant='filled'
 								fullWidth
+								value={userName}
 								error={errors.userName && true}
 								helperText={errors.userName ? errors.userName?.message : ''}
 								{...register('userName', {
@@ -81,12 +102,14 @@ export const SignUp = () => {
 										value: 20,
 										message: 'El usuario debe contener maximo 20 caracteres',
 									},
+									onChange: (e) => setUserName(e.target.value)
 								})}
 							/>
 							<TextField
 								label='Email'
 								variant='filled'
 								fullWidth
+								value={email}
 								error={errors.email && true}
 								helperText={errors.email ? errors.email?.message : ''}
 								{...register('email', {
@@ -95,6 +118,7 @@ export const SignUp = () => {
 										value: emailRegex,
 										message: 'Introduce un correo valido',
 									},
+									onChange: (e) => setEmail(e.target.value)
 								})}
 							/>
 
@@ -108,12 +132,14 @@ export const SignUp = () => {
 									type={showPassword ? 'text' : 'password'}
 									fullWidth
 									error={errors.password && true}
+									value={password}
 									
 									{...register('password', {
 										required: {
 											value: true,
 											message: 'password is required',
 										},
+										onChange: (e) => setPassword(e.target.value)
 									})}
 									endAdornment={
 										<InputAdornment position='end'>

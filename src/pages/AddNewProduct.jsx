@@ -37,6 +37,19 @@ export const AddNewProduct = () => {
 		console.log(newPost);
 	};
 
+	const handleDeleteImage = ( image ) => {
+
+		const a = images.filter( img => {
+			if( img !== image){
+				return img;
+			}
+		})
+
+		setImages(a)
+
+		console.log(a);
+	}
+
 	return (
 		<>
 			<Grid container>
@@ -100,9 +113,9 @@ export const AddNewProduct = () => {
 									{images.map((image, i) => {
 										const index = i + 1;
 										return (
-											<li key={i}>
-												<a target='_blank' href={image}>{`imagen ${index}`}</a>
-												<Button>X</Button>
+											<li key={i} style={{listStyle: 'none'}}>
+												<img src={image} style={{width: '120px',}} />
+												<Button onClick={()=> handleDeleteImage(image)}>X</Button>
 											</li>
 										);
 									})}

@@ -8,11 +8,10 @@ export const PostCard = ({product} )   => {
 	return (
 		<Grid
 			item
-			xs={'auto'}
-			md={'auto'}
-            maxWidth='320px'
+			// xs={'auto'}
+			// md={'auto'}
 			margin={{ xs: 'auto', md: '0' }}
-            sx={{marginBottom: '35px'}}
+            sx={{marginBottom: '35px',width:'320px'}}
 		>
 			<Paper elevation={3} sx={{ padding: '10px' }}>
 				<img
