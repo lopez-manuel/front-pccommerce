@@ -26,8 +26,11 @@ export const Home = () => {
 		<>
 			<h1>HOME</h1>
 
-			<Grid container>
-				<Grid container display='flex' flexWrap='wrap' direction='row' gap={'16px'}>
+			<Grid container margin={0} display='flex' flexDirection='row'>
+				<Grid item xs={12} md={2} sx={{width: '240px', height:'100vh'}}>
+					hola
+				</Grid>
+				<Grid container xs={12} md={10} rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
                     {products.map( (product,i) => <PostCard key={i} product={product}/>)}
                     
 				</Grid>

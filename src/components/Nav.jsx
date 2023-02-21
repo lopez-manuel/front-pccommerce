@@ -51,11 +51,13 @@ React.useEffect(() => {
 const pcMenu =  <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap:'14px', padding: '10px'}}>
 
 
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Videojuegos </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Tecnologia </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Promociones </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Vinos </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Licores </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Accesorios </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Computadoras </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Componentes </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Monitores </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Software </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Audio </NavLink>
+<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Consolas </NavLink>
 
 </Grid>
 
