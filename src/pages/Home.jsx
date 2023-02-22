@@ -26,13 +26,17 @@ export const Home = () => {
 		<>
 			<h1>HOME</h1>
 
-			<Grid container margin={0} display='flex' flexDirection='row'>
-				<Grid item xs={12} md={2} sx={{width: '240px', height:'100vh'}}>
-					hola
-				</Grid>
-				<Grid container xs={12} md={10} rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
-                    {products.map( (product,i) => <PostCard key={i} product={product}/>)}
-                    
+			<Grid container >
+				<Grid item xs={12} xl={10} margin={0} display='flex' flexDirection='row'>
+
+					<Grid item xs={12} xl={4} md={2} sx={{width: '240px', height:'100vh'}}>
+						hola
+					</Grid>
+					
+					<Grid container xs={12} md={10} lg={12} rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
+						{products.map( (product,i) => <PostCard key={i} product={product}/>)}
+						
+					</Grid>
 				</Grid>
 			</Grid>
 		</>

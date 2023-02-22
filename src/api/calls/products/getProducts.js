@@ -10,6 +10,17 @@ export const peticion =  () => {
 		.catch((error) => console.log(error));
 };
 
+export const getProductById = ( id ) => {
+
+	return api.get(`/productos/${id}`)
+				.then( response => response.data )
+				.catch( error => {
+					console.log(error);
+					throw new Error('Ha ocurrido un error');
+				})
+
+}
+
 export const newProduct = (newPost) => {
 
 	return api

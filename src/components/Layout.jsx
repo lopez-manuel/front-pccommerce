@@ -11,7 +11,11 @@ export const Layout = () => {
         <>
             <Grid  container bgcolor={"primary.main"} sx={{ display: 'flex', flexDirection: {xs: 'column', md: 'row'}, alignContent:{xs: 'center'}, alignItems: {md:'center'} }}>
                 <Grid item xs={12} md={6} lg={3}>
+                    <NavLink to='/'>
+
+
                     <img width={ "300px"}  src={logo} alt="" />
+                    </NavLink>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
                     <SearchBar/>

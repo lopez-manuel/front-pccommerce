@@ -6,6 +6,7 @@ import { Layout } from '../components/Layout'
 import { AddNewProduct } from '../pages/AddNewProduct';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
+import { ProductPage } from '../pages/ProductPage';
 import { SignUp } from '../pages/SignUp';
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: 'addproduct',
                 element: <AddNewProduct/>
+            },
+            {
+                path: '/:categoria/:id',
+                element: <ProductPage />
             }
         ]
     },
