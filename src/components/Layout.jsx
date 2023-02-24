@@ -9,18 +9,18 @@ import SearchBar from './SearchBar';
 export const Layout = () => {
     return (
         <>
-            <Grid  container bgcolor={"primary.main"} sx={{ display: 'flex', flexDirection: {xs: 'column', md: 'row'}, alignContent:{xs: 'center'}, alignItems: {md:'center'} }}>
-                <Grid item xs={12} md={6} lg={3}>
+            <Grid  container bgcolor={"primary.main"} sx={{ display: 'flex', flexDirection: {xs: 'column', md: 'row'}, alignContent:{xs: ''}, alignItems: {md:'center'} }}>
+                <Grid item xs={12} md={4} lg={3}>
                     <NavLink to='/'>
 
 
                     <img width={ "300px"}  src={logo} alt="" />
                     </NavLink>
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6} lg={7}>
                     <SearchBar/>
                 </Grid>
-                <Grid item xs={12} md={12} lg={5}>
+                <Grid item xs={12} md={2} lg={2}>
                     <Nav/>
                 </Grid>
             </Grid>

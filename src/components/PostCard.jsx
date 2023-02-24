@@ -21,14 +21,14 @@ export const PostCard = ({product} )   => {
 		<Grid
 			item
 			// xs={'auto'}
-			// md={'auto'}
+				// md={'auto'}
 			margin={{ xs: 'auto', md: '0' }}
             // sx={{marginBottom: '35px',width:'320px'}}
 			xs={11}
 			md={6}
-			sm={6}
+			sm={5}
 			lg={4}
-			xl={3}
+			xl={4}
 		>
 			<NavLink to={`/${product._id}`}>
 
@@ -36,7 +36,7 @@ export const PostCard = ({product} )   => {
 			<Paper elevation={3} sx={{ padding: '10px', maxHeight: '650px' }}>
 				<div style={{width: 'fit-content', margin:'0 auto'}}>
 				<img
-					maxWidth={'100%'}
+					style={{maxWidth:'100%'}}
 					height={'200px'}
 					src={product.imagenes[0]}
 					alt=''

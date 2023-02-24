@@ -39,9 +39,9 @@ const handleClose = () => {
 };
 
 
-let px = window.screen.width
+
 window.addEventListener('resize',()=>{
-    if(window.screen.width < 400 ){
+    if(window.screen.width < 900 ){
         setMobilMenu(true);
         return;
     }
@@ -49,25 +49,14 @@ window.addEventListener('resize',()=>{
 }) 
 
 React.useEffect(() => {
-    if(window.screen.width < 400 ){
+    if(window.screen.width < 900 ){
         setMobilMenu(true);
     }
 }, [])
 
 
 
-const pcMenu =  <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap:'14px', padding: '10px'}}>
 
-
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Accesorios </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Computadoras </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Componentes </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Monitores </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Software </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Audio </NavLink>
-<NavLink to="/" style={{textDecoration:'none', color: 'white'}}> Consolas </NavLink>
-
-</Grid>
 
 const handleNavigate  = () => {
 
@@ -81,12 +70,12 @@ return (
     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'space-between' }}>
 
         { (mobilMenu) 
-            ? <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap:'14px', padding: '10px'}}>
+            && <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap:'14px', padding: '10px'}}>
 
                 <DrawerMenu/>
 
                 </Grid>    
-            : pcMenu }
+        }
         
         
         
@@ -97,18 +86,18 @@ return (
                 </Badge>
             </IconButton>
         
-        <Tooltip title="Account settings">
-        <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-        >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-        </IconButton>
-        </Tooltip>
+            <Tooltip title="Account settings">
+            <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+            >
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            </IconButton>
+            </Tooltip>
         </Grid>
 
         

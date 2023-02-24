@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, IconButton, Typography } from '@mui/material';
+import { Button, Divider, Grid, IconButton, Rating, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getProductById, peticion } from '../api/calls/products/getProducts';
@@ -87,12 +87,13 @@ export const ProductPage = () => {
                             })}
                             </Grid>
                                 
-                            <Grid item xs={9} sm={6} md={7} lg={4} xl={6} border='1px solid gray' padding='24px' margin='0 auto'>
+                            <Grid item xs={9} sm={6} md={7} lg={4} xl={8}  padding='24px' margin='0 auto'>
                             <img width='100%' src={( image ) ? image : product?.imagenes[0]} alt="" />
                             </Grid>
                         </Grid>
                         <Grid item md={5} xl={5} margin='24px'>
                             <Typography variant='h4'>{product?.titulo}</Typography>
+                            <Rating name="read-only" value={product?.rate || 3} readOnly />
                             <p>{currencyFormat(product?.precio)}</p>
                             <p>Vendidor por: Manuel</p>
                             <Button variant='contained' onClick={handleAddToCart}>

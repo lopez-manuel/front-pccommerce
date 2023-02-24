@@ -4,9 +4,11 @@ import Paper from '@mui/material/Paper';
 import { Grid, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { PostCard } from '../components/PostCard';
+import { AsideMenu } from '../components/AsideMenu';
 
 export const Home = () => {
 	const [products, setProducts] = useState([]);
+	const [aside, setAside] = useState();
 
 	useEffect(() => {
 		peticion()
@@ -20,22 +22,41 @@ export const Home = () => {
 			});
 	}, []);
 
+
+	
+	window.addEventListener('resize',()=>{
+		if(window.screen.width > 900 ){
+			setAside(true);
+			return;
+		}
+		setAside(false);
+	}) 
+	
+	useEffect(() => {
+		if(window.screen.width > 900 ){
+			setAside(true);
+		}
+	}, [])
+
+
 	if (products.length === 0) return <h1>Cargando</h1>;
 
 	return (
 		<>
-			<h1>HOME</h1>
+			<Grid container marginTop='96px' >
+				<Grid item xs={12} xl={12} margin={'0'} display='flex' flexDirection='row'>
 
-			<Grid container >
-				<Grid item xs={12} xl={10} margin={0} display='flex' flexDirection='row'>
-
-					<Grid item xs={12} xl={4} md={2} sx={{width: '240px', height:'100vh'}}>
-						hola
+					{ aside && <Grid item xs={12} xl={3} md={3} sx={{width: '240px', height:'100vh'}}>
+						<AsideMenu/>
 					</Grid>
+					}
 					
-					<Grid container xs={12} md={10} lg={12} rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
-						{products.map( (product,i) => <PostCard key={i} product={product}/>)}
-						
+					<Grid margin={'0 auto'} item xl={8} xs={12} md={8}>
+
+						<Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3, xl: 4}}>
+							{products.map( (product,i) => <PostCard key={i} product={product}/>)}
+							
+						</Grid>
 					</Grid>
 				</Grid>
 			</Grid>

@@ -8,7 +8,7 @@ export default function InputWithIcon() {
 return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-        <TextField id="input-with-sx" label="Buscar producto" color='secondary'  variant="filled" fullWidth sx={{ marginRight: '50px',}} />
+        <TextField id="input-with-sx" label="Buscar producto" color='secondary'  variant="filled" sx={{ margin:'0 auto', width: '90%'}} />
     </Box>
     </Box>
 );

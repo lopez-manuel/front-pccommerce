@@ -15,17 +15,17 @@ export const CartPage = () => {
 
     const productContainer = (producto) =>{
         return (
-            <Grid margin='0 auto' marginBottom='50px' borderBottom='1px solid black' padding='16px' item xs={12} sm={10} md={12} lg={8} xl={4}  display='flex' flexDirection='column' alignItems='center' sx={{flexDirection: {xs: 'column',md:'row'} }}>
-                <Grid xs={12} md={7} lg={5} margin='0 auto' item display='flex' flexDirection='row' gap='20px' sx={{cursor: 'pointer'}} onClick={ () => handleNavigate(producto)} >
+            <Grid margin='0 auto' marginBottom='50px' borderBottom='1px solid black' padding='16px' item xs={12} sm={10} md={12} lg={8} xl={6}  display='flex' flexDirection='column' alignItems='center' sx={{flexDirection: {xs: 'column',md:'row'} }}>
+                <Grid xs={12} md={7} lg={5} xl={6} margin='0 auto' item display='flex' flexDirection='row' gap='20px' sx={{cursor: 'pointer'}} onClick={ () => handleNavigate(producto)} >
                     <img width='70px' src={producto.imagenes[0]} alt="" />
                     <Typography variant='p'>{producto.titulo}</Typography>
                 </Grid>
-                <Grid xs={12} md={3} lg={4} margin='24px auto' display='flex' item gap='24px'>
+                <Grid xs={12} md={3} lg={4} xl={3} margin='24px auto' display='flex' item gap='24px'>
                     <Typography variant='p'>Cantidad: {producto.cantidad}</Typography>
                     <Typography variant='p'>Total: {currencyFormat(producto.precio * producto.cantidad)}</Typography>
                     
                 </Grid>
-                <Grid item xs={12} md={2}>
+                <Grid item xs={12} md={2} xl={2}>
 
                 <Button fullWidth variant='contained' color='error' onClick={ () => handleDelete(producto)}>
                         Eliminar
