@@ -15,6 +15,8 @@ export const ProductPage = () => {
     const [ image, setImage ] = useState("");
     const navigate = useNavigate();
 
+    const [openAlert, setOpenAlert] = React.useState(false);
+
     const { id } = useParams();
 
     
@@ -23,8 +25,6 @@ export const ProductPage = () => {
         getProductById( id )
             .then( response => {
                 setProduct(response.producto);
-                console.log(response.producto);
-                console.log(product);
             })
             .catch( error => navigate('/',{ replace: true}));
 
@@ -39,10 +39,41 @@ export const ProductPage = () => {
     const handleLeft = (e) =>{
         e.stopPropagation();
         const divImages = e.target?.parentElement?.nextElementSibling;
-        console.log('');
         divImages?.scrollBy(320,0)
     }
 
+    const handleAddToCart = () => {
+
+        let cart = JSON.parse(localStorage.getItem("MexstoreCart")) || [];
+
+        const existe = cart.some( item => item._id === product._id );
+
+        if(existe){
+            product.cantidad ++;
+            cart = cart.map( item => {
+                if(item._id === product._id){
+                    item.cantidad ++;
+                    return item;
+                }
+                else{
+                    return item;
+                }
+            })
+        }
+        else{
+            product.cantidad = 1;
+            cart = [...cart, product];
+        }
+
+        localStorage.setItem("MexstoreCart", JSON.stringify(cart));
+
+        console.log(cart);
+
+    }
+
+    function currencyFormat(num = 0) {
+        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' MXN'
+    }
 
     return (
         <>
@@ -62,9 +93,9 @@ export const ProductPage = () => {
                         </Grid>
                         <Grid item md={5} xl={5} margin='24px'>
                             <Typography variant='h4'>{product?.titulo}</Typography>
-                            <p>{`$ ${product?.precio} MXN`}</p>
+                            <p>{currencyFormat(product?.precio)}</p>
                             <p>Vendidor por: Manuel</p>
-                            <Button variant='contained'>
+                            <Button variant='contained' onClick={handleAddToCart}>
                                 <AddShoppingCartIcon/>
                                 Agregar al carrito
                             </Button>
@@ -79,11 +110,11 @@ export const ProductPage = () => {
                             {/* <img width='100%' src='https://discosdurosymas.net/productos3/MOU-XZMX920B/MOU-XZMX920B.jpg' /> */}
                         </Grid>
                     </Grid>
-                    <Grid item  position='relative' margin='100px 0'>
+                    <Grid item  position='relative' margin='200px 0'>
 
-                        <Typography textAlign='center' variant='h5'>Productos relacionados</Typography>
+                        <Typography textAlign='center' variant='h5' marginBottom='120px'>Productos relacionados</Typography>
 
-                            <ChevronLeftIcon onClick={handleLeft}  sx={{fontSize: '80px', top: 60, left: 0, zIndex: '3', position:'absolute', cursor:'pointer'}} color='blue'/>
+                            <ChevronLeftIcon onClick={handleLeft}  sx={{fontSize: '80px', top: 220, left: 0, zIndex: '3', position:'absolute', cursor:'pointer'}} color='blue'/>
                         <Grid item className='related' width='100%' display='flex'  >
                             
                             {productos.map( producto => {
@@ -92,7 +123,7 @@ export const ProductPage = () => {
 
                         </Grid>
 
-                        <ChevronRightIcon onClick={(e) => e.target?.previousElementSibling?.scrollBy(-320,0)} sx={{fontSize: '80px', position: 'absolute', top: 60, right: 0, zIndex: '3'}} color='blue'/>
+                        <ChevronRightIcon onClick={(e) => e.target?.previousElementSibling?.scrollBy(-320,0)} sx={{fontSize: '80px', position: 'absolute', top: 220, right: 0, zIndex: '3'}} color='blue'/>
                     </Grid>
 
                 </Grid>

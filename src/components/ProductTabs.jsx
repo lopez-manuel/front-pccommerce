@@ -12,7 +12,7 @@ export const ProductTabs = ({descripcion}) => {
 
         switch (tabIndex) {
             case "1":
-                return descripcion;
+                return <div dangerouslySetInnerHTML={{__html: descripcion}} />;
                 break;
         
             default:
@@ -32,7 +32,7 @@ export const ProductTabs = ({descripcion}) => {
                     <Divider sx={{margin: '24px 0'}}/>
                     
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} margin='0 auto'>
                     { (elements())}
                 </Grid>
             </Grid>

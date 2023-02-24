@@ -15,12 +15,19 @@ import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import { DrawerMenu } from './DrawerMenu';
 
+let cart = JSON.parse(localStorage.getItem("MexstoreCart")) || [];
+
+console.log(cart);
+
 
 export default function Nav() {
+
+const navigate = useNavigate();
+
 const [anchorEl, setAnchorEl] = React.useState(null);
 const [mobilMenu, setMobilMenu ] = React.useState(false);
 const open = Boolean(anchorEl);
@@ -30,6 +37,7 @@ const handleClick = (event) => {
 const handleClose = () => {
     setAnchorEl(null);
 };
+
 
 let px = window.screen.width
 window.addEventListener('resize',()=>{
@@ -61,7 +69,12 @@ const pcMenu =  <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'row', f
 
 </Grid>
 
+const handleNavigate  = () => {
 
+    navigate('/cart');
+
+
+}
 
 return (
     <React.Fragment>
@@ -78,8 +91,8 @@ return (
         
         
         <Grid item xs={4} display='flex' flexDirection='row'>
-            <IconButton>
-                <Badge badgeContent={10} sx={{ fontSize: '10px'}} color="secondary">
+            <IconButton onClick={handleNavigate}>
+                <Badge badgeContent={cart.length} sx={{ fontSize: '10px'}} color="secondary">
                     <ShoppingCartOutlined fontSize='large' color='action'/>
                 </Badge>
             </IconButton>

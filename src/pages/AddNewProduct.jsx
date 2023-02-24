@@ -5,6 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState, useEffect } from 'react';
 import { newProduct } from '../api/calls/products/getProducts';
 import { getCategorias } from '../api/calls/categorias/categorias';
+import { useQuill } from 'react-quilljs'
+import 'quill/dist/quill.snow.css'
+
 
 export const AddNewProduct = () => {
 	const [title, setTitle] = useState('');
@@ -15,6 +18,8 @@ export const AddNewProduct = () => {
 	const [categoria, setCategoria] = useState('');
 	const [categorias, setCategorias] = useState([]);
 	const [currentStep, setCurrentStep] = useState(1);
+
+	const { quill, quillRef } = useQuill();
 
 useEffect(() => {
 	getCategorias()
@@ -36,7 +41,7 @@ useEffect(() => {
 
 			const newPost = {
 				titulo: title,
-				descripcion: description,
+				descripcion: quill.root.innerHTML,
 				precio: price,
 				imagenes: images,
 				categorias: [{
@@ -85,18 +90,20 @@ useEffect(() => {
 		},
 		{
 			step: 2,
-			component: <TextField
-							id='outlined-multiline-static'
-							label='Descripcion'
-							margin='normal'
-							multiline
-							rows={20}
-							fullWidth
-							placeholder='Introduzca una descripcion para su producto'
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-							key={'Descripcion'}
-						/>
+			component: ""
+			
+			// component: <TextField
+			// 				id='outlined-multiline-static'
+			// 				label='Descripcion'
+			// 				margin='normal'
+			// 				multiline
+			// 				rows={20}
+			// 				fullWidth
+			// 				placeholder='Introduzca una descripcion para su producto'
+			// 				value={description}
+			// 				onChange={(e) => setDescription(e.target.value)}
+			// 				key={'Descripcion'}
+			// 			/>
 		},
 		{
 			step: 3,
@@ -170,6 +177,18 @@ useEffect(() => {
 
 	}
 
+	useEffect(() => {
+		if (quill) {
+		  quill.on('text-change', (delta, oldDelta, source) => {
+			console.log('Text change!');
+			console.log(quill.getText()); // Get text only
+			console.log(quill.getContents()); // Get delta contents
+			console.log(quill.root.innerHTML); // Get innerHTML using quill
+			console.log(quillRef.current.firstChild.innerHTML); // Get innerHTML using quillRef
+		  });
+		}
+	  }, [quill]);
+
 	return (
 		<>
 			<Grid container>
@@ -191,6 +210,13 @@ useEffect(() => {
 										return step.component;
 									}
 								})}
+
+								<Grid item  marginBottom='24px'>
+								<div style={{ width: '100%', height: 300, display: (currentStep === 2) ? 'block' : 'none' }}>
+									<div ref={quillRef} />
+								</div>
+								</Grid>
+								
 
 								<Grid item margin='0 auto' sx={{ width: 'fit-content', display: 'flex',  gap:'32px'}}>
 								<Button  
