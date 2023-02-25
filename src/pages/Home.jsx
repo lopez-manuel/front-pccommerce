@@ -43,7 +43,7 @@ export const Home = () => {
 
 	return (
 		<>
-			<Grid container marginTop='96px' >
+			<Grid container marginTop='96px' className='maincontainer' >
 				<Grid item xs={12} xl={12} margin={'0'} display='flex' flexDirection='row'>
 
 					{ aside && <Grid item xs={12} xl={3} md={3} sx={{width: '240px', height:'100vh'}}>

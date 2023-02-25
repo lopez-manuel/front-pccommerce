@@ -93,7 +93,7 @@ export const ProductPage = () => {
                         </Grid>
                         <Grid item md={5} xl={5} margin='24px'>
                             <Typography variant='h4'>{product?.titulo}</Typography>
-                            <Rating name="read-only" value={product?.rate || 3} readOnly />
+                            <Rating name="read-only" value={product?.rated || 3} readOnly />
                             <p>{currencyFormat(product?.precio)}</p>
                             <p>Vendidor por: Manuel</p>
                             <Button variant='contained' onClick={handleAddToCart}>
@@ -104,7 +104,7 @@ export const ProductPage = () => {
                         <Grid xs={12} item margin='24px'>
                             <Divider />
                             <br/>
-                            <ProductTabs descripcion={product?.descripcion}/>
+                            <ProductTabs producto={product}/>
                             
                         </Grid>
                         <Grid item sx={12} margin={'0 auto'}>

@@ -43,3 +43,23 @@
     width: 100%;
     scroll-behavior: smooth;
 }
+
+.infop{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    min-width: 200px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    background-color: #88bfdc11;
+}
+.infospan{
+    font-weight: lighter;
+}
+
+@media (min-width: 1800px) {
+    .maincontainer{
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+}

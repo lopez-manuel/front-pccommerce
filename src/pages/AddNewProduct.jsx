@@ -18,6 +18,10 @@ export const AddNewProduct = () => {
 	const [categoria, setCategoria] = useState('');
 	const [categorias, setCategorias] = useState([]);
 	const [currentStep, setCurrentStep] = useState(1);
+	const [marca, setMarca] = useState("");
+	const [modelo, setModelo] = useState("");
+	const [fabricante, setFabricante] = useState("");
+	const [peso, setPeso] = useState("");
 
 	const { quill, quillRef } = useQuill();
 
@@ -37,7 +41,7 @@ useEffect(() => {
 		e.preventDefault();
 
 
-		if( currentStep === 5 ){
+		if( currentStep === 6 ){
 
 			const newPost = {
 				titulo: title,
@@ -47,6 +51,12 @@ useEffect(() => {
 				categorias: [{
 					_id: categoria
 				}],
+				informacion: {
+					marca,
+					modelo,
+					fabricante,
+					peso
+				}
 			};
 
 			newProduct(newPost)
@@ -92,21 +102,52 @@ useEffect(() => {
 			step: 2,
 			component: ""
 			
-			// component: <TextField
-			// 				id='outlined-multiline-static'
-			// 				label='Descripcion'
-			// 				margin='normal'
-			// 				multiline
-			// 				rows={20}
-			// 				fullWidth
-			// 				placeholder='Introduzca una descripcion para su producto'
-			// 				value={description}
-			// 				onChange={(e) => setDescription(e.target.value)}
-			// 				key={'Descripcion'}
-			// 			/>
 		},
 		{
 			step: 3,
+			component: 
+			<Grid item display={'flex'} flexDirection='column' gap={'24px'}>
+				<Typography variant='h6'>Informacion del producto</Typography>
+				<TextField
+					id='outlined-basic'
+					label='Marca'
+					variant='outlined'
+					fullWidth
+					value={marca}
+					onChange={(e) => setMarca(e.target.value)}
+					key={'marca'}
+				/>
+				<TextField
+					id='outlined-basic'
+					label='Modelo'
+					variant='outlined'
+					fullWidth
+					value={modelo}
+					onChange={(e) => setModelo(e.target.value)}
+					key={'modelo'}
+				/>
+				<TextField
+					id='outlined-basic'
+					label='Fabricante'
+					variant='outlined'
+					fullWidth
+					value={fabricante}
+					onChange={(e) => setFabricante(e.target.value)}
+					key={'fabricante'}
+				/>
+				<TextField
+					id='outlined-basic'
+					label='Peso'
+					variant='outlined'
+					fullWidth
+					value={peso}
+					onChange={(e) => setPeso(e.target.value)}
+					key={'peso'}
+				/>
+			</Grid>
+		},
+		{
+			step: 4,
 			component: <TextField
 							margin='normal'
 							fullWidth
@@ -121,7 +162,7 @@ useEffect(() => {
 						/>
 		},
 		{
-			step: 4,
+			step: 5,
 			component: <>
 				<Grid>
 					<TextField
@@ -150,7 +191,7 @@ useEffect(() => {
 			</>
 		},
 		{
-			step: 5,
+			step: 6,
 			component:<Grid>
 						<InputLabel id='categories'>Categoria</InputLabel>
 							<Select
@@ -233,7 +274,7 @@ useEffect(() => {
 										variant='contained'
 										type='submit'
 									>
-										{ (currentStep === 5) ? 'Agregar Producto' : 'Siguiente'}
+										{ (currentStep === 6) ? 'Agregar Producto' : 'Siguiente'}
 									</Button>
 								</Grid>
 							</form>
