@@ -62,7 +62,7 @@ export const ProductTabs = ({producto}) => {
     return (
         <>
             <Grid container margin='0 auto' display='flex' justifyContent='center'>
-                <Grid item sx={12} >
+                <Grid item >
                     <ul className='tab' onClick={(e) => setTabIndex(e.target.getAttribute('index')) }>
                         <li className='tab-i' style={{ borderBottom: (tabIndex === "1") ? '2px solid red' : '' }} index={1}>Descripcion</li>
                         <li className='tab-i' style={{ borderBottom: (tabIndex === "2") ? '2px solid red' : '' }} index={2}>Informacion</li>

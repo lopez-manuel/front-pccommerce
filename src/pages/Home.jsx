@@ -5,6 +5,7 @@ import { Grid, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { PostCard } from '../components/PostCard';
 import { AsideMenu } from '../components/AsideMenu';
+import { UploadImages } from '../components/UploadImages';
 
 export const Home = () => {
 	const [products, setProducts] = useState([]);
@@ -59,6 +60,7 @@ export const Home = () => {
 						</Grid>
 					</Grid>
 				</Grid>
+				
 			</Grid>
 		</>
 	);

@@ -7,14 +7,14 @@ import { newProduct } from '../api/calls/products/getProducts';
 import { getCategorias } from '../api/calls/categorias/categorias';
 import { useQuill } from 'react-quilljs'
 import 'quill/dist/quill.snow.css'
+import { UploadImages } from '../components/UploadImages';
+import { api } from '../api/axios/instance';
+
 
 
 export const AddNewProduct = () => {
 	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
-	const [images, setImages] = useState([]);
-	const [imageURL, setImageURL] = useState('');
 	const [categoria, setCategoria] = useState('');
 	const [categorias, setCategorias] = useState([]);
 	const [currentStep, setCurrentStep] = useState(1);
@@ -22,6 +22,8 @@ export const AddNewProduct = () => {
 	const [modelo, setModelo] = useState("");
 	const [fabricante, setFabricante] = useState("");
 	const [peso, setPeso] = useState("");
+	const [ imagesList, setImagesList ] = useState(null);
+	const images = (imagesList) ? [...imagesList ] : [];
 
 	const { quill, quillRef } = useQuill();
 
@@ -32,22 +34,22 @@ useEffect(() => {
 }, [])
 
 
-	const handleClick = () => {
-		setImages([...images, imageURL]);
-		setImageURL('');
-	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-
 		if( currentStep === 6 ){
+
+			const data = new FormData();
+
+			images.forEach( (image, i) => {
+				data.append(`archivo${i}`, image);
+			})
 
 			const newPost = {
 				titulo: title,
 				descripcion: quill.root.innerHTML,
 				precio: price,
-				imagenes: images,
 				categorias: [{
 					_id: categoria
 				}],
@@ -59,30 +61,29 @@ useEffect(() => {
 				}
 			};
 
-			newProduct(newPost)
-				.then((response) => console.log(response))
+			data.append('post', JSON.stringify(newPost))
+
+			newProduct(data)
+				.then((response) => {
+					quill.root.innerHTML = '';
+					setTitle('');
+					setPrice(0);
+					setCategoria('');
+					setMarca('');
+					setModelo('');
+					setFabricante('');
+					setPeso('');
+					setImagesList(null);
+					setCurrentStep(1);
+				})
 				.catch((error) => console.log(error));
 
-			console.log(newPost);
 		}
 
 		else {
 			setCurrentStep(currentStep + 1);
 		}
 	};
-
-	const handleDeleteImage = ( image ) => {
-
-		const a = images.filter( img => {
-			if( img !== image){
-				return img;
-			}
-		})
-
-		setImages(a)
-
-		console.log(a);
-	}
 
 
 	const steps = [
@@ -97,11 +98,6 @@ useEffect(() => {
 							onChange={(e) => setTitle(e.target.value)}
 							key={'Nombredelproducto'}
 						/>
-		},
-		{
-			step: 2,
-			component: ""
-			
 		},
 		{
 			step: 3,
@@ -163,32 +159,7 @@ useEffect(() => {
 		},
 		{
 			step: 5,
-			component: <>
-				<Grid>
-					<TextField
-					value={imageURL}
-					onChange={(e) => setImageURL(e.target.value)}
-					id='outlined-basic'
-					label='Imagen URL'
-					variant='outlined'
-					fullWidth
-					/>
-					<button onClick={handleClick} type='button' title='button'>
-					Cargar
-					</button>
-				</Grid>
-				<ul>
-					{images.map((image, i) => {
-						const index = i + 1;
-						return (
-							<li key={i} style={{listStyle: 'none'}}>
-								<img src={image} style={{width: '120px',}} />
-								<Button onClick={()=> handleDeleteImage(image)}>X</Button>
-							</li>
-						);
-					})}
-				</ul>
-			</>
+			component: <UploadImages setImagesList={setImagesList} images={images} />
 		},
 		{
 			step: 6,
@@ -253,6 +224,7 @@ useEffect(() => {
 								})}
 
 								<Grid item  marginBottom='24px'>
+								<Typography variant='h6' sx={{ display: (currentStep === 2) ? 'block' : 'none'}}>Descripcion del producto</Typography>
 								<div style={{ width: '100%', height: 300, display: (currentStep === 2) ? 'block' : 'none' }}>
 									<div ref={quillRef} />
 								</div>

@@ -1,5 +1,5 @@
 import Paper from '@mui/material/Paper';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Grid, Rating, Typography } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export const PostCard = ({product} )   => {
 
 	const handleNavigate = () => {
 
-		navigate(`/${product?.categorias[0]?.nombre}/${product._id}`);
+		navigate(`/${product?.categorias[0]?.nombre}/${product._id}/#tit`);
 
 
 	}
@@ -34,7 +34,7 @@ export const PostCard = ({product} )   => {
 
 			</NavLink>
 			<Paper elevation={3} sx={{ padding: '10px', maxHeight: '650px' }}>
-				<div style={{width: 'fit-content', margin:'0 auto'}}>
+				<div id='tit' style={{width: 'fit-content', margin:'0 auto'}}>
 				<img
 					style={{maxWidth:'100%'}}
 					height={'200px'}
@@ -43,7 +43,8 @@ export const PostCard = ({product} )   => {
 				/>
 				</div>
 				<Typography  className='title-card' variant='h6'>{product.titulo}</Typography>
-				<div style={{height: '198px'}} className='text-card' dangerouslySetInnerHTML={{__html: product.descripcion}} />
+				<Rating name="read-only" value={product?.rated || 3} readOnly />
+				<div style={{height: '192px'}} className='text-card' dangerouslySetInnerHTML={{__html: product.descripcion}} />
 					
 				
 				{/* <p style={{height: '198px'}} className='text-card'>{product.descripcion}</p> */}

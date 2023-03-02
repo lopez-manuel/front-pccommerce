@@ -1,6 +1,6 @@
 import { Button, Divider, Grid, IconButton, Rating, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { ScrollRestoration, useNavigate, useParams } from 'react-router-dom'
 import { getProductById, peticion } from '../api/calls/products/getProducts';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ProductTabs } from '../components/ProductTabs';
@@ -77,6 +77,7 @@ export const ProductPage = () => {
 
     return (
         <>
+            <ScrollRestoration/>
             <Grid container marginTop='54px'>
                 <Grid item xs={12} xl={6} margin='0 auto' border=''>
                     <Grid container>
@@ -107,7 +108,7 @@ export const ProductPage = () => {
                             <ProductTabs producto={product}/>
                             
                         </Grid>
-                        <Grid item sx={12} margin={'0 auto'}>
+                        <Grid item xs={12} margin={'0 auto'}>
                             {/* <img width='100%' src='https://discosdurosymas.net/productos3/MOU-XZMX920B/MOU-XZMX920B.jpg' /> */}
                         </Grid>
                     </Grid>
@@ -115,16 +116,16 @@ export const ProductPage = () => {
 
                         <Typography textAlign='center' variant='h5' marginBottom='120px'>Productos relacionados</Typography>
 
-                            <ChevronLeftIcon onClick={handleLeft}  sx={{fontSize: '80px', top: 220, left: 0, zIndex: '3', position:'absolute', cursor:'pointer'}} color='blue'/>
+                            <ChevronLeftIcon onClick={handleLeft}  style={{fontSize: '80px', top: 220, left: 0, zIndex: '3', position:'absolute', cursor:'pointer'}} color='blue'/>
                         <Grid item className='related' width='100%' display='flex'  >
                             
-                            {productos.map( producto => {
-                                return <RelatedProducts producto={producto}/>
+                            {productos.map( (producto,i) => {
+                                return <RelatedProducts key={`${producto?.titulo}+${i}`} producto={producto}/>
                             })}
 
                         </Grid>
 
-                        <ChevronRightIcon onClick={(e) => e.target?.previousElementSibling?.scrollBy(-320,0)} sx={{fontSize: '80px', position: 'absolute', top: 220, right: 0, zIndex: '3'}} color='blue'/>
+                        <ChevronRightIcon onClick={(e) => e.target?.previousElementSibling?.scrollBy(-320,0)} style={{fontSize: '80px', position: 'absolute', top: 220, right: 0, zIndex: '3'}} color='blue'/>
                     </Grid>
 
                 </Grid>

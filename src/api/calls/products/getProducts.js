@@ -21,10 +21,10 @@ export const getProductById = ( id ) => {
 
 }
 
-export const newProduct = (newPost) => {
+export const newProduct = (data) => {
 
 	return api
-		.post('/productos', newPost)
+		.post('/productos', data)
 		.then((response) => {
 			return response;
 		})
