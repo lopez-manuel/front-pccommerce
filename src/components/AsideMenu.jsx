@@ -7,6 +7,12 @@ import AlbumIcon from '@mui/icons-material/Album';
 import SpeakerIcon from '@mui/icons-material/Speaker';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import React from 'react'
+import { NavLink } from 'react-router-dom';
+
+const linkStyle = {
+    textDecoration: 'none', 
+    color: 'black'
+}
 
 export const AsideMenu = () => {
     return (
@@ -18,52 +24,66 @@ export const AsideMenu = () => {
 
                     <List>
                         <ListItem >
-                            <ListItemIcon>
+                            <ListItemIcon >
                                 <DevicesOtherIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Accsesorios'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b2c4372c7e5c5166be8'>
+                                <ListItemText primary='Accsesorios'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <ComputerIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Computadoras'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b384372c7e5c5166bea'>
+                                <ListItemText primary='Computadoras'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <AccountTreeIcon/>
                             </ListItemIcon>
+                            <NavLink style={linkStyle} to='/categoria/63f42b424372c7e5c5166bec'>
                             <ListItemText primary='Componentes'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <TvIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Monitores'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b524372c7e5c5166bee'>
+                                <ListItemText primary='Monitores'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <AlbumIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Software'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b5e4372c7e5c5166bf0'>
+                                <ListItemText primary='Software'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <SpeakerIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Audio'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b654372c7e5c5166bf2'>
+                                <ListItemText primary='Audio'/>
+                            </NavLink>
                         </ListItem>
 
                         <ListItem >
                             <ListItemIcon>
                                 <VideogameAssetIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Consolas'/>
+                            <NavLink style={linkStyle} to='/categoria/63f42b6e4372c7e5c5166bf4'>
+                                <ListItemText primary='Consolas'/>
+                            </NavLink>
                         </ListItem>
                     </List>
                 </Paper>

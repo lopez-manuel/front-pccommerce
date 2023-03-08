@@ -5,5 +5,5 @@ const local = 'http://localhost:3000';
 const linuxServer = 'http://138.128.244.146:3000/'
 
 export const api = axios.create({
-    baseURL: linuxServer
+    baseURL: local
 })

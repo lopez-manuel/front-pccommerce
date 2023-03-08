@@ -8,6 +8,7 @@ import { CartPage } from '../pages/CartPage';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
 import { ProductPage } from '../pages/ProductPage';
+import { ProductsByCategory } from '../pages/ProductsByCategory';
 import { SignUp } from '../pages/SignUp';
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/cart',
                 element: <CartPage/>
+            },
+            {
+                path: '/categoria/:id',
+                element: <ProductsByCategory />
             }
         ]
     },
